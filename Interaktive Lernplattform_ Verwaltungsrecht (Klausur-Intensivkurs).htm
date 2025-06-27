@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktive Lernplattform: Verwaltungsrecht (Klausur-Intensivkurs)</title>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .prose {
+            max-width: none;
+            color: #334155;
+        }
+        .prose h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+        .prose .h2-container {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .prose h2 {
+            font-family: 'Lora', serif;
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0;
+        }
+        .h3-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .prose h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600;
+            color: #1e3a8a;
+            margin: 0; /* Margin is now on the container */
+        }
+        .h4-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #dbeafe;
+        }
+         .prose h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            color: #1e3a8a;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        .prose p, .prose ul, .prose li, .prose ol {
+            line-height: 1.8;
+            font-size: 1rem; /* text-base */
+        }
+        .prose ul, .prose ol {
+            padding-left: 1.75rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .prose strong {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .klausur-hinweis {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.375rem;
+        }
+        .klausur-hinweis strong {
+            color: #b45309;
+        }
+        .sidebar-link.active {
+            background-color: #eef2ff;
+            color: #312e81;
+            border-right: 3px solid #4f46e5;
+            font-weight: 600;
+        }
+        .summary-toggle-btn {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #c7d2fe;
+            white-space: nowrap;
+        }
+        .summary-toggle-btn:hover {
+            background-color: #c7d2fe;
+            color: #312e81;
+        }
+        .summary-content {
+            background-color: #f1f5f9;
+            border: 1px dashed #cbd5e1;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+        }
+        /* Styles für die Karteikarten-Buttons und Inhalte */
+        .flashcard-toggle-btn {
+            background-color: #dcfce7; /* Light Green */
+            color: #166534; /* Dark Green */
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #86efac;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+        .flashcard-toggle-btn:hover {
+            background-color: #bbf7d0;
+            color: #15803d;
+        }
+        .flashcard-content {
+            background-color: #f0fdf4; /* Very Light Green */
+            border: 1px dashed #86efac;
+            padding: 1.25rem;
+            margin-top: -0.5rem; /* Closer to the heading */
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .flashcard-content ul {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+            margin-top: 0;
+        }
+        .flashcard-content li {
+            margin-bottom: 0.5rem;
+        }
+        .exercise-container {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .solution-toggle-btn {
+            background-color: #16a34a;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            margin-top: 1rem;
+            border: none;
+        }
+        .solution-toggle-btn:hover {
+            background-color: #15803d;
+        }
+        .solution-content {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        /* Styles for Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .schema-list ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .schema-list > ul > li {
+            font-weight: bold;
+            font-size: 1.125rem;
+            margin-top: 1.5rem;
+        }
+        .schema-list .sub-list {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            font-weight: normal;
+            font-size: 1rem;
+        }
+        .schema-list .sub-list li {
+             margin-top: 0.5rem;
+        }
+        .schema-list .paragraph {
+            font-family: monospace;
+            background-color: #eef2ff;
+            color: #4338ca;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-72 bg-white shadow-lg flex-shrink-0 flex flex-col">
+            <div class="p-6 border-b">
+                <h1 class="text-2xl font-bold text-gray-900">Lernplattform</h1>
+                <p class="text-sm text-gray-500">Allg. Verwaltungsrecht</p>
+            </div>
+
+            <!-- Button for Prüfschema -->
+            <div class="p-4">
+                 <button id="open-schema-btn" class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300">
+                    Prüfschema
+                </button>
+            </div>
+
+            <nav id="topic-nav" class="flex-1 overflow-y-auto">
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="gesetzmaessigkeit">Gesetzmäßigkeit</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="verhaeltnismaessigkeit">Verhältnismäßigkeit</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="gleichheit">Gleichheitsgrundsatz</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium active" data-topic="grundlagen">Grundlagen des VA</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="arten">Arten von VAs</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="wirksamkeit">Wirksamkeit & Bekanntgabe</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="nebenbestimmungen">Nebenbestimmungen</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="rechtmaessigkeit">Rechtmäßigkeit des VA</a>
+                <a href="#" class="sidebar-link block py-3 px-6 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition duration-150 ease-in-out font-medium" data-topic="ermessensfehler">Ermessensfehler</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-1 p-4 md:p-8 overflow-y-auto">
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-xl max-w-5xl mx-auto">
+                <div id="content-area" class="prose">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal for Prüfschema -->
+    <div id="schema-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+             <button id="close-schema-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+            <h1 class="text-2xl font-bold mb-4 text-gray-800">Prüfschema: Rechtmäßigkeit eines Verwaltungsaktes</h1>
+            <div class="schema-list">
+                <ul>
+                    <li>A. Formelle Rechtmäßigkeit
+                        <ul class="sub-list">
+                            <li>1. Zuständigkeit <span class="paragraph">§ 3 VwVfG i.V.m. Spezialnormen</span></li>
+                            <li>2. Verfahren
+                                <ul class="sub-list">
+                                    <li>- Anhörung <span class="paragraph">§ 28 VwVfG</span></li>
+                                    <li>- Akteneinsicht <span class="paragraph">§ 29 VwVfG</span></li>
+                                    <li>- Mitwirkungsverbote <span class="paragraph">§§ 20, 21 VwVfG</span></li>
+                                </ul>
+                            </li>
+                            <li>3. Form
+                                 <ul class="sub-list">
+                                    <li>- Bestimmtheit <span class="paragraph">§ 37 I VwVfG</span></li>
+                                    <li>- Begründung <span class="paragraph">§ 39 VwVfG</span></li>
+                                    <li>- Ggf. Rechtsbehelfsbelehrung <span class="paragraph">§ 58 VwGO</span></li>
+                                </ul>
+                            </li>
+                             <li>4. Evtl. Heilung von Fehlern <span class="paragraph">§ 45 VwVfG</span></li>
+                             <li>5. Evtl. Unbeachtlichkeit von Fehlern <span class="paragraph">§ 46 VwVfG</span></li>
+                        </ul>
+                    </li>
+                    <li>B. Materielle Rechtmäßigkeit
+                         <ul class="sub-list">
+                            <li>1. Ermächtigungsgrundlage <span class="paragraph">Vorbehalt des Gesetzes</span></li>
+                            <li>2. Tatbestandsvoraussetzungen der Norm (Subsumtion)</li>
+                            <li>3. Ordnungsgemäße Rechtsfolge
+                                <ul class="sub-list">
+                                    <li>- Gebundene Entscheidung vs. Ermessen <span class="paragraph">§ 40 VwVfG</span></li>
+                                    <li>- Bei Ermessen: Prüfung auf Ermessensfehler</li>
+                                    <li>- **Grundsatz der Verhältnismäßigkeit** <span class="paragraph">Art. 20 III GG</span>
+                                        <ul class="sub-list">
+                                            <li>- Legitimer Zweck</li>
+                                            <li>- Geeignetheit</li>
+                                            <li>- Erforderlichkeit</li>
+                                            <li>- Angemessenheit</li>
+                                        </ul>
+                                    </li>
+                                    <li>- Beachtung von Grundrechten (z.B. <span class="paragraph">Art. 3 I GG</span>)</li>
+                                </ul>
+                            </li>
+                            <li>4. Richtiger Adressat</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Data object containing the content for each topic
+        const learningContent = {
+            gesetzmaessigkeit: {
+                title: 'Grundsatz der Gesetzmäßigkeit der Verwaltung',
+                content: `
+                    <div class="h2-container">
+                        <h2>Bindung an Recht und Gesetz (Art. 20 Abs. 3 GG)</h2>
+                         <button class="summary-toggle-btn" data-summary="gesetz_summary">Kernpunkte</button>
+                    </div>
+                    <div id="gesetz_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Rechtsstaatsprinzip:</strong> Die Verwaltung ist an Recht und Gesetz gebunden.</li>
+                            <li><strong>Vorrang des Gesetzes:</strong> Kein Handeln <strong>gegen</strong> das Gesetz. Verwaltungsmaßnahmen dürfen nicht gegen höherrangiges Recht verstoßen.</li>
+                            <li><strong>Vorbehalt des Gesetzes:</strong> Kein Handeln <strong>ohne</strong> Gesetz. Eingriffe in Rechte der Bürger bedürfen einer gesetzlichen Ermächtigungsgrundlage.</li>
+                        </ul>
+                    </div>
+                    <p>Das Rechtsstaatsprinzip aus Art. 20 Abs. 3 GG ist einer der tragenden Verfassungsgrundsätze. Es besagt, dass die vollziehende Gewalt – also die Verwaltung – an "Gesetz und Recht" gebunden ist. Dieser Grundsatz schützt die Bürger vor willkürlichem Staatshandeln und sichert die Rechtsgleichheit. Er wird durch zwei wesentliche Prinzipien konkretisiert:</p>
+
+                    <h3>1. Vorrang des Gesetzes</h3>
+                    <p>Der Vorrang des Gesetzes bedeutet, dass keine Verwaltungsmaßnahme gegen geltendes Recht verstoßen darf. Das Gesetz ist dem Verwaltungshandeln übergeordnet. Dies umfasst die gesamte Rechtsordnung, von der Verfassung über Bundes- und Landesgesetze bis hin zu Rechtsverordnungen und Satzungen. Handelt die Verwaltung entgegen einer Rechtsnorm, ist ihre Maßnahme rechtswidrig.</p>
+                    <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> Ein Sachbearbeiter im Ordnungsamt verbietet einem Bürger das Rasenmähen am Samstagnachmittag um 15:30 Uhr, weil er das Anliegen eines sich gestört fühlenden Nachbarn für berechtigt hält. Eine geltende Lärmschutzverordnung erlaubt das Rasenmähen an Samstagen aber ausdrücklich bis 17:00 Uhr. Das Verbot des Sachbearbeiters verstößt damit gegen höherrangiges Recht (die Verordnung) und ist wegen des Verstoßes gegen den Vorrang des Gesetzes rechtswidrig.
+                    </div>
+
+                    <h3>2. Vorbehalt des Gesetzes</h3>
+                    <p>Der Vorbehalt des Gesetzes besagt, dass die Verwaltung für bestimmte Handlungen einer gesetzlichen Grundlage bedarf. Sie darf nicht "einfach so" tätig werden. Dies gilt insbesondere für die <strong>Eingriffsverwaltung</strong>, also für alle Maßnahmen, die in die Rechte und Freiheiten der Bürger eingreifen (z.B. durch Verbote, Gebote, Belastungen).</p>
+                    <p>Für den Bereich der Leistungsverwaltung (z.B. Subventionen) gilt der Vorbehalt des Gesetzes ebenfalls, sobald öffentliche Mittel nach einem bestimmten Plan vergeben werden, um die Gleichbehandlung und Transparenz zu sichern.</p>
+                     <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> Eine Gemeinde möchte zur Sanierung ihres Haushalts eine "allgemeine Bürgerumlage" von 500 € pro Jahr von jedem Einwohner erheben. Eine solche finanzielle Belastung ist ein erheblicher Eingriff in das Grundrecht auf Eigentum (Art. 14 GG). Ohne eine spezielle gesetzliche Ermächtigung (z.B. im Kommunalabgabengesetz) fehlt der Gemeinde die Befugnis für diese Erhebung. Das Handeln würde gegen den Vorbehalt des Gesetzes verstoßen.
+                    </div>
+                `
+            },
+            verhaeltnismaessigkeit: {
+                title: 'Grundsatz der Verhältnismäßigkeit',
+                content: `
+                    <div class="h2-container">
+                        <h2>Das Übermaßverbot</h2>
+                         <button class="summary-toggle-btn" data-summary="verh_summary">Kernpunkte</button>
+                    </div>
+                    <div id="verh_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Leitgedanke:</strong> "Nicht mit Kanonen auf Spatzen schießen."</li>
+                            <li><strong>Prüfung in drei bzw. vier Stufen:</strong> Jede staatliche Maßnahme muss einem legitimen Zweck dienen und geeignet, erforderlich und angemessen sein.</li>
+                            <li><strong>Geeignetheit:</strong> Die Maßnahme muss den legitimen Zweck zumindest fördern.</li>
+                            <li><strong>Erforderlichkeit:</strong> Es darf kein milderes, gleich wirksames Mittel geben.</li>
+                            <li><strong>Angemessenheit:</strong> Der Eingriff darf nicht außer Verhältnis zum verfolgten Zweck stehen (Zweck-Mittel-Relation).</li>
+                        </ul>
+                    </div>
+                    <p>Der Grundsatz der Verhältnismäßigkeit, auch Übermaßverbot genannt, ist ein zentraler Ausfluss des Rechtsstaatsprinzips. Er verlangt, dass jeder Eingriff des Staates in die Rechte von Bürgern einem legitimen Zweck dienen und in einem vernünftigen Verhältnis zu diesem Zweck stehen muss. Eine Maßnahme ist nur dann verhältnismäßig, wenn sie alle vier folgenden Kriterien erfüllt:</p>
+                    
+                    <h3>1. Legitimer Zweck</h3>
+                    <p>Jede staatliche Maßnahme muss einen Zweck verfolgen, der im öffentlichen Interesse liegt und rechtlich zulässig ist.</p>
+                    
+                    <h3>2. Geeignetheit</h3>
+                    <p>Eine Maßnahme ist <strong>geeignet</strong>, wenn sie den angestrebten Zweck überhaupt erreichen oder ihm zumindest förderlich sein kann. Es geht nicht darum, ob sie das beste Mittel ist, sondern nur, ob sie zur Zweckerreichung objektiv tauglich ist.</p>
+                     <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> Um die Lärmbelästigung durch eine Industrieanlage zu senken, ordnet die Behörde den Einbau eines teuren Filters an. Später stellt sich heraus, dass dieser Filtertyp die spezifischen Lärmemissionen der Anlage technisch gar nicht reduzieren kann. Die Anordnung war somit <strong>ungeeignet</strong> und damit rechtswidrig.
+                    </div>
+
+                    <h3>3. Erforderlichkeit</h3>
+                    <p>Eine Maßnahme ist <strong>erforderlich</strong>, wenn es kein anderes, milderes Mittel gibt, das den Zweck genauso wirksam erreicht. Die Behörde muss unter mehreren geeigneten Mitteln dasjenige auswählen, das den Einzelnen und die Allgemeinheit am wenigsten belastet.</p>
+                     <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> Von einem alten Haus fallen regelmäßig Dachziegel auf den Gehweg. Die Baubehörde ordnet den vollständigen Abriss des Hauses an. Diese Maßnahme ist zwar geeignet, die Gefahr zu beseitigen. Sie ist aber nicht <strong>erforderlich</strong>, da als milderes, gleich wirksames Mittel die Anordnung zur Reparatur des Daches ausgereicht hätte.
+                    </div>
+                    
+                    <h3>4. Angemessenheit (Verhältnismäßigkeit i.e.S.)</h3>
+                    <p>Eine Maßnahme ist <strong>angemessen</strong>, wenn der Nachteil, den sie für den Betroffenen verursacht, nicht außer Verhältnis zum angestrebten Nutzen für die Allgemeinheit steht. Hier findet eine Güter- und Interessenabwägung statt: Die Intensität des Eingriffs wird mit der Wichtigkeit des verfolgten Ziels abgewogen.</p>
+                     <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> Ein lebensgefährlicher Kampfhund läuft frei in einem Wohngebiet umher und hat bereits Passanten angegriffen. Die Behörde ordnet die Einschläferung des Hundes an. Obwohl dies der intensivste Eingriff ist, könnte er <strong>angemessen</strong> sein, wenn mildere Mittel (z.B. Maulkorbzwang, Sicherstellung) bereits gescheitert sind oder keine sofortige und endgültige Gefahrenabwehr versprechen. Die hohe Gefahr für Leib und Leben der Menschen überwiegt hier das Interesse des Halters am Eigentum seines Tieres.
+                    </div>
+                     <div class="exercise-container">
+                        <h5>Übungsfall: Schulverweis</h5>
+                        <p>Der 18-jährige Schüler X betreibt eine private Homepage. Dort stellt er für den Fall des Todes seines Mitschülers Y ein Fest in Aussicht. Zudem duldet er auf der Seite Einträge von Mitschülern, die einen Amoklauf in der Schule thematisieren. Dies führt zu erheblicher Unruhe an der Schule, sodass der Unterricht abgebrochen werden muss. Die zuständige Schulbehörde verweist X daraufhin an ein 35 km entferntes Gymnasium. X hält die Maßnahme für überzogen, da es sich um einen schlechten Scherz und außerschulisches Verhalten gehandelt habe.</p>
+                        <strong>Frage:</strong> Ist die Überweisung an die andere Schule materiell rechtmäßig, insbesondere verhältnismäßig?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Die Maßnahme ist materiell rechtmäßig.</strong></p>
+                           <p><strong>1. Ermächtigungsgrundlage:</strong> Liegt in einer entsprechenden schulgesetzlichen Norm (§ 60a I, II Nr. 4 SchulG im Beispielsfall).</p>
+                           <p><strong>2. Tatbestandsvoraussetzungen:</strong> Es liegt eine besonders schwerwiegende Störung des Schulbetriebs vor. Die menschenverachtende Äußerung über den Mitschüler und das Dulden von Amoklauf-Fantasien stellen ein schwerwiegendes Fehlverhalten dar. Obwohl es sich um außerschulisches Verhalten handelt, hat es den Schulfrieden unmittelbar und massiv gestört (Unterrichtsabbruch, Polizeieinsatz). Das Verhalten des X war vorsätzlich.</p>
+                           <p><strong>3. Rechtsfolge (Verhältnismäßigkeit):</strong></p>
+                           <ul>
+                            <li><strong>Legitimer Zweck:</strong> Wiederherstellung des Schulfriedens und Schutz der Schulgemeinschaft.</li>
+                            <li><strong>Geeignetheit:</strong> Der Schulverweis ist geeignet, den Schulfrieden an der alten Schule wiederherzustellen.</li>
+                            <li><strong>Erforderlichkeit:</strong> Mildere Mittel wie ein schriftlicher Verweis oder eine Umsetzung in eine Parallelklasse wären angesichts der Schwere des Vorfalls und der entstandenen Unruhe nicht gleich wirksam gewesen. Die Schule durfte im Rahmen ihres pädagogischen Ermessens davon ausgehen, dass nur eine einschneidende Maßnahme eine ausreichende generalpräventive Wirkung hat und das Vertrauen in die Schulordnung wiederherstellt.</li>
+                            <li><strong>Angemessenheit:</strong> Das Fehlverhalten des X wiegt sehr schwer. Die damit für ihn verbundenen Nachteile (längerer Schulweg, Kosten, Eingewöhnungsschwierigkeiten) sind im Vergleich zur Störung des Schulfriedens und der Verletzung der Würde des Mitschülers hinzunehmen. Die Maßnahme ist daher angemessen.</li>
+                           </ul>
+                        </div>
+                    </div>
+                `
+            },
+            gleichheit: {
+                 title: 'Gleichheitsgrundsatz (Art. 3 Abs. 1 GG)',
+                content: `
+                    <div class="h2-container">
+                        <h2>Gleiches gleich, Ungleiches ungleich behandeln</h2>
+                        <button class="summary-toggle-btn" data-summary="gleich_summary">Kernpunkte</button>
+                    </div>
+                    <div id="gleich_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Kerngehalt:</strong> Die Verwaltung muss wesentlich gleiche Sachverhalte gleich und wesentlich ungleiche Sachverhalte ungleich behandeln.</li>
+                            <li><strong>Willkürverbot:</strong> Ungleichbehandlungen bedürfen eines sachlichen, nachvollziehbaren Grundes.</li>
+                            <li><strong>"Keine Gleichheit im Unrecht":</strong> Ein Bürger kann nicht verlangen, dass die Verwaltung bei ihm denselben Fehler macht, den sie bei einem anderen gemacht hat.</li>
+                        </ul>
+                    </div>
+                    <p>Der allgemeine Gleichheitssatz aus Art. 3 Abs. 1 GG verpflichtet die gesamte Staatsgewalt, also auch die Verwaltung, wesentlich Gleiches nicht willkürlich ungleich und wesentlich Ungleiches nicht willkürlich gleich zu behandeln. Dieser Grundsatz ist eine tragende Säule der Gerechtigkeit und verhindert eine unsachliche oder willkürliche Bevorzugung oder Benachteiligung von Bürgern.</p>
+                    
+                    <h3>Wann liegt ein Verstoß vor?</h3>
+                    <p>Ein Verstoß gegen den Gleichheitssatz liegt vor, wenn die Verwaltung für eine unterschiedliche Behandlung von zwei vergleichbaren Fällen <strong>keinen sachlichen Grund</strong> anführen kann. Die Gründe für die Ungleichbehandlung dürfen nicht willkürlich sein, sondern müssen sich aus der Natur der Sache oder anderen vernünftigen Erwägungen ergeben.</p>
+                    <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> In einer Straße stehen mehrere Autos im absoluten Halteverbot. Ein Mitarbeiter des Ordnungsamtes verteilt nur an die Fahrer von roten Autos Knöllchen, weil er diese Farbe nicht mag, die anderen Falschparker lässt er unbehelligt. Hier liegt ein klarer Verstoß gegen den Gleichheitssatz vor, da für die Ungleichbehandlung kein sachlicher Grund (wie z.B. eine besondere Gefährdung durch ein bestimmtes Fahrzeug) ersichtlich ist. Die Farbwahl ist ein willkürliches Kriterium.
+                    </div>
+
+                    <h3>Keine Gleichheit im Unrecht</h3>
+                    <p>Ein sehr wichtiger Aspekt in der Klausur ist der Grundsatz "Keine Gleichheit im Unrecht". Die Verwaltung ist an Recht und Gesetz gebunden (Art. 20 Abs. 3 GG). Aus diesem Grund kann ein Bürger nicht verlangen, dass die Behörde ihm gegenüber ebenfalls rechtswidrig handelt, nur weil sie dies bei einer anderen Person getan hat.</p>
+                     <div class="klausur-hinweis">
+                        <strong>Beispiel:</strong> Bürger A erhält fälschlicherweise eine Baugenehmigung für einen Anbau, der gegen den Bebauungsplan verstößt. Sein Nachbar B beantragt nun ebenfalls eine Genehmigung für einen identischen, vorschriftswidrigen Anbau und beruft sich auf den Fall von A. Die Behörde muss den Antrag von B ablehnen. B kann sich nicht auf den Gleichheitssatz berufen, um eine rechtswidrige Genehmigung zu erzwingen. Es gibt keinen Anspruch auf Wiederholung eines Verwaltungsfehlers.
+                    </div>
+                `
+            },
+            grundlagen: {
+                title: 'Grundlagen des Verwaltungsaktes (VA)',
+                content: `
+                    <div class="h2-container">
+                        <h2>Definition und Merkmale des Verwaltungsaktes (§ 35 S. 1 VwVfG)</h2>
+                        <button class="summary-toggle-btn" data-summary="grundlagen_summary">Kernpunkte</button>
+                    </div>
+                    <div id="grundlagen_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Hoheitliche Maßnahme:</strong> Einseitiges, zweckgerichtetes Handeln im Über-/Unterordnungsverhältnis.</li>
+                            <li><strong>Behörde:</strong> Jede Stelle, die Aufgaben öffentlicher Verwaltung wahrnimmt (§ 1 IV VwVfG).</li>
+                            <li><strong>Gebiet des öffentlichen Rechts:</strong> Abgrenzung per modifizierter Subjektstheorie (Sonderrecht des Staates).</li>
+                            <li><strong>Regelung:</strong> Unmittelbar auf Setzung einer verbindlichen Rechtsfolge gerichtet.</li>
+                            <li><strong>Einzelfall:</strong> Regelung eines konkret-individuellen Sachverhalts oder einer Allgemeinverfügung.</li>
+                            <li><strong>Außenwirkung:</strong> Rechtsfolgen treten bei einem Rechtssubjekt außerhalb der Verwaltung ein.</li>
+                        </ul>
+                    </div>
+
+                    <p>Der Verwaltungsakt (VA) ist die zentrale Handlungsform der Verwaltung. Die saubere Prüfung seiner sechs Definitionsmerkmale aus § 35 S. 1 VwVfG ist oft der Einstieg in eine verwaltungsrechtliche Klausur und legt die Basis für alle weiteren Prüfungsschritte. Fehler hier sind oft fatal.</p>
+                    
+                    <h3>1. Hoheitliche Maßnahme</h3>
+                    <p>Eine <strong>Maßnahme</strong> ist jedes zweckgerichtete Handeln einer Behörde mit Entscheidungscharakter. <strong>Hoheitlich</strong> ist die Maßnahme, wenn sie einseitig im Rahmen eines öffentlich-rechtlichen Über- und Unterordnungsverhältnisses ergangen ist. Die Behörde handelt mit staatlicher Autorität und erlässt eine verbindliche Anordnung, anstatt einen Konsens zu suchen (wie im Zivilrecht bei Verträgen).</p>
+                    <div class="klausur-hinweis">
+                        <strong>Klausur-Abgrenzung: Realakt vs. VA.</strong> Dies ist ein Standardproblem. Ein VA zielt auf eine <strong>Rechtsfolge</strong> (z.B. Erlaubnis, Verbot). Ein Realakt (oder schlicht-hoheitliches Handeln) zielt auf einen <strong>tatsächlichen Erfolg</strong> (z.B. die Warnung vor einer Gefahr, die Auszahlung von Geld, eine polizeiliche Beobachtung). Eine Warnung selbst ist ein Realakt; die darauf folgende Anordnung, das Gebiet zu verlassen, wäre ein VA.</div>
+
+                    <h3>2. Behörde</h3>
+                    <p>Gemäß § 1 Abs. 4 VwVfG ist eine Behörde jede Stelle, die Aufgaben der öffentlichen Verwaltung wahrnimmt. Der Begriff ist funktional zu verstehen. Neben den klassischen Behörden im organisatorischen Sinne (z.B. Landratsamt, Ministerium) fallen hierunter auch <strong>Beliehene</strong> (Privatpersonen oder -unternehmen, denen durch Gesetz hoheitliche Aufgaben übertragen wurden, z.B. der TÜV, Notare, Bezirksschornsteinfeger).</p>
+
+                    <h3>3. Auf dem Gebiet des öffentlichen Rechts</h3>
+                    <p>Dies setzt nach dem Sinn und Zweck des § 35 VwVfG voraus, dass es sich vorliegend um eine Rechtsbeziehung handelt, die dem Rechtsgebiet des Verwaltungsrechts zuzuordnen ist. Ob dem so ist, lässt sich insbesondere mithilfe der <strong>modifizierten Subjektstheorie (Sonderrechtstheorie)</strong> belegen: Eine Rechtsnorm ist dann öffentlich-rechtlich, wenn sie in jedem denkbaren Anwendungsfall ausschließlich einen Träger öffentlicher Gewalt als solchen einseitig berechtigt oder verpflichtet. Findet sich eine solche Norm als Grundlage für das Handeln, ist das Merkmal erfüllt.</p>
+                    
+                    <h3>4. Regelung</h3>
+                    <p>Dies ist das Kernmerkmal und oft der Schwerpunkt der Prüfung. Eine Regelung liegt vor, wenn die Maßnahme auf die (unmittelbare) Herbeiführung einer <strong>verbindlichen Rechtsfolge</strong> gerichtet ist und diese auch tatsächlich herbeiführt. Das bedeutet, dass Rechte oder Pflichten einer Person begründet, geändert, aufgehoben, mit bindender Wirkung festgestellt oder eine solche Rechtsfolge versagt werden.</p>
+                    
+                    <h4>Arten der Regelung</h4>
+                    <p>Die Regelungswirkung eines VA kann unterschiedlichen Inhalt haben:</p>
+                        <ul>
+                            <li><strong>Befehlender VA:</strong> Statuiert ein verbindliches Gebot oder Verbot. Der Adressat wird zu einem Tun, Dulden oder Unterlassen verpflichtet. (Beispiele: Abrissverfügung, Steuerbescheid, Versammlungsverbot).</li>
+                            <li><strong>Rechtsgestaltender VA:</strong> Begründet, ändert oder beendet ein subjektives Recht oder ein konkretes Rechtsverhältnis. (Beispiele: Erteilung einer Baugenehmigung, Ernennung zum Beamten, Widerruf einer Erlaubnis).</li>
+                            <li><strong>Feststellender VA:</strong> Stellt das Bestehen oder Nichtbestehen eines Rechtsverhältnisses oder einer rechtserheblichen Eigenschaft verbindlich fest. Die Rechtslage wird hier nicht neu geschaffen, sondern nur autoritativ geklärt. (Beispiele: Feststellung der Staatsangehörigkeit, Feststellung, dass für ein Vorhaben keine Genehmigung benötigt wird).</li>
+                        </ul>
+                    <div class="klausur-hinweis"><strong>Klausur-Abgrenzung: Vorbereitende Handlungen vs. Regelung.</strong> Interne Prüfvermerke, die Einholung von Stellungnahmen oder die bloße Ankündigung einer späteren Maßnahme ("Ich werde nächste Woche Ihre Gaststätte schließen") sind keine Regelungen, da sie noch keine endgültige, nach außen gerichtete Rechtsfolge setzen. Es fehlt die unmittelbare Rechtswirkung.</div>
+
+                    <h3>5. Einzelfall</h3>
+                    <p>Es handelt sich jedenfalls immer dann um einen Einzelfall im verwaltungsrechtlichen Sinne, wenn die Maßnahme <strong>konkret</strong> und <strong>individuell</strong> ist. Eine Maßnahme ist dann konkret, wenn sie nach Zeit, Ort, Personen und sonstigen Umständen derart bestimmt ist, dass sie sich in dieser Konstellation nur einmal ereignen kann. Eine Maßnahme ist zudem individueller Natur, wenn sie sich an eine bestimmte Person (Einzelverfügung) oder an zumindest bestimmbare Personen richtet, die mit Namen bezeichnet werden können und zahlenmäßig feststehen.</p>
+                    <h4>Sonderfall: Allgemeinverfügung (§ 35 S. 2 VwVfG)</h4>
+                     <p>Dies ist ein VA, auch wenn er einen größeren Personenkreis betrifft. Klausurrelevant sind vor allem:</p>
+                        <ol>
+                            <li><strong>Personenbezogene AV (Alt. 1):</strong> Richtet sich an einen nach allgemeinen Merkmalen bestimmten oder bestimmbaren Personenkreis (z.B. "Alle Besucher des Rockkonzerts haben den Platz zu verlassen.").</li>
+                            <li><strong>Benutzungsregelnde AV (Alt. 3):</strong> Regelt die Benutzung einer Sache durch die Allgemeinheit (z.B. ein Verkehrszeichen, das das Parken verbietet).</li>
+                        </ol>
+
+                    <h3>6. Außenwirkung</h3>
+                    <p>Eine Maßnahme hat Außenwirkung, wenn sie auf die Herbeiführung von Rechtsfolgen gegenüber außerhalb der Behörde stehenden natürlichen oder juristischen Personen gerichtet ist. Die Maßnahme muss den Wirkungsbereich der handelnden Verwaltungsbehörde verlassen und in den Rechtskreis des Adressaten eindringen. Lediglich verwaltungsinterne Maßnahmen (Weisungen) lösen keine Außenwirkung aus.</p>
+                    <div class="klausur-hinweis"><strong>Klausur-Abgrenzung: Sonderstatusverhältnisse.</strong> Besonders relevant ist die Abgrenzung in Sonderstatusverhältnissen (Schule, Uni, Beamtenverhältnis, Strafvollzug). Hier wird nach der Intensität des Eingriffs unterschieden: Maßnahmen, die das <strong>Grundverhältnis</strong> betreffen (den Status als solchen), haben Außenwirkung und sind VAs (z.B. Ausschluss von der Schule, Nichtversetzung, Exmatrikulation). Maßnahmen, die nur das <strong>Betriebsverhältnis</strong> betreffen (interne Organisation), haben keine Außenwirkung (z.B. Zuweisung eines Klassenraums, eine einzelne Hausaufgabe).</div>
+
+                    <h4>Übungsfälle zu den VA-Merkmalen</h4>
+
+                    <div class="exercise-container">
+                        <h5>Fall 1: Das "Gefährderanschreiben"</h5>
+                        <p>Störenfried S tritt beim lokalen Weinfest öfter strafrechtlich in Erscheinung. Um Störungen beim diesjährigen Fest zu verhindern, schickt Polizeikommissar P ein „Gefährderanschreiben“ an S. Darin wird auf polizeirechtliche Konsequenzen bei einem Fehlverhalten aufmerksam gemacht.</p>
+                        <strong>Frage:</strong> Enthält das Gefährderanschreiben eine „Regelung“ i.S.d. § 35 S. 1 VwVfG?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                            <p><strong>Nein.</strong> Eine Regelung liegt vor, wenn die Maßnahme unmittelbar auf die Herbeiführung einer verbindlichen Rechtsfolge gerichtet ist. Das Gefährderanschreiben begründet oder ändert keine Rechte oder Pflichten von S, sondern zielt lediglich auf die Herbeiführung eines tatsächlichen Erfolgs (Abschreckung). Ihm kommt allein Hinweis- bzw. Empfehlungscharakter zu. Es fehlt somit am Regelungscharakter; es handelt sich um einen <strong>Realakt</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h5>Fall 2: Die Schneeentsorgung</h5>
+                        <p>Behörde B vereinbart mit A vertraglich, dass dieser die Schneeentsorgung auf der öffentlichen Zufahrtsstraße zu seiner Villa organisieren muss. Als es im darauffolgenden Jahr heftig schneit, will A den Schnee nicht entfernen.</p>
+                        <strong>Frage:</strong> Ist die Vereinbarung eine „hoheitliche Maßnahme“ i.S.d. § 35 S. 1 VwVfG?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                            <p><strong>Nein.</strong> Eine hoheitliche Maßnahme ist durch ein einseitiges Handeln im Über- und Unterordnungsverhältnis gekennzeichnet. Vorliegend haben die Behörde B und A eine <strong>vertragliche Vereinbarung</strong> getroffen. Diese ist nicht einseitig, sondern zweiseitig und beruht auf gleichberechtigten Willenserklärungen. A und B stehen sich als ebenbürtige Vertragspartner gegenüber. Folglich handelt es sich nicht um eine hoheitliche Maßnahme, sondern um einen öffentlich-rechtlichen Vertrag.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-container">
+                        <h5>Fall 3: Zusätzliche Aufgaben für die Beamtin</h5>
+                        <p>L ist Landesbeamtin in einem Verwaltungsamt. Sie ist dort in einem bestimmten Sachgebiet tätig. Nachdem Stellen gestrichen werden müssen, bekommt L von der Hausleitung zusätzlich noch drei weitere Sachgebiete zugewiesen.</p>
+                        <strong>Frage:</strong> Hat die Zuweisung der weiteren Sachgebiete „Außenwirkung“ i.S.d. § 35 S. 1 VwVfG?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Nein.</strong> Eine Maßnahme hat Außenwirkung, wenn sie Rechtsfolgen für ein Rechtssubjekt <strong>außerhalb</strong> der Verwaltung begründet. Die Zuweisung zusätzlicher Sachgebiete an L ist eine verwaltungsinterne Weisung (sog. innerdienstliche Weisung). Sie betrifft L in ihrer internen Stellung als Amtsträgerin und verlässt den Innenbereich der Verwaltung nicht. Es fehlt daher die erforderliche Außenwirkung.</p>
+                        </div>
+                    </div>
+                `
+            },
+            arten: {
+                title: 'Arten von Verwaltungsakten',
+                content: `
+                    <div class="h2-container">
+                        <h2>Systematisierung der Verwaltungsakte</h2>
+                        <button class="summary-toggle-btn" data-summary="arten_summary">Kernpunkte</button>
+                    </div>
+                    <div id="arten_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Nach Inhalt:</strong> befehlend (Ge-/Verbot), rechtsgestaltend (begründet/ändert/beendet Recht), feststellend (klärt Recht).</li>
+                            <li><strong>Nach Wirkung:</strong> begünstigend (gewährt Vorteil), belastend (legt Pflicht auf), mit Doppelwirkung (beides für eine Person), mit Drittwirkung (begünstigt A, belastet B).</li>
+                            <li><strong>Nach Form:</strong> schriftlich, mündlich, elektronisch, konkludent.</li>
+                            <li><strong>Nach Mitwirkung:</strong> antragsbedürftig (nur auf Antrag), von Amts wegen.</li>
+                        </ul>
+                    </div>
+                    <p>Die korrekte Einordnung eines VA ist entscheidend, da hiervon wichtige Rechtsfolgen abhängen, wie z.B. die Anwendbarkeit der §§ 48, 49 VwVfG (Aufhebung), die Notwendigkeit einer Anhörung oder die statthafte Klageart im Prozess.</p>
+                    
+                    <h3>1. Nach dem Inhalt</h3>
+                    <p>Die Regelungswirkung eines VA kann unterschiedlichen Inhalt haben:</p>
+                        <ul>
+                            <li><strong>Befehlender VA:</strong> Statuiert ein verbindliches Gebot oder Verbot. Der Adressat wird zu einem Tun, Dulden oder Unterlassen verpflichtet. (Bsp.: Abrissverfügung, Steuerbescheid, Versammlungsverbot).</li>
+                            <li><strong>Rechtsgestaltender VA:</strong> Begründet, ändert oder beendet ein subjektives Recht oder ein konkretes Rechtsverhältnis. (Bsp.: Erteilung einer Genehmigung, Ernennung zum Beamten, Widerruf einer Erlaubnis).</li>
+                            <li><strong>Feststellender VA:</strong> Stellt das Bestehen oder Nichtbestehen eines Rechtsverhältnisses oder einer rechtserheblichen Eigenschaft einer Person oder Sache verbindlich fest. (Bsp.: Feststellung der Staatsangehörigkeit, Feststellung, dass für ein Vorhaben keine Genehmigung benötigt wird). Die Rechtslage wird nicht neu geschaffen, sondern nur geklärt.</li>
+                        </ul>
+
+                    <h3>2. Nach der Wirkung für den Adressaten</h3>
+                    <ul>
+                        <li><strong>Begünstigender VA (§ 48 VwVfG):</strong> Begründet oder bestätigt ein Recht oder einen rechtlichen Vorteil. Solche VAs genießen besonderen Vertrauensschutz bei einer eventuellen Aufhebung. (Bsp.: Baugenehmigung, Subventionsbescheid).</li>
+                        <li><strong>Belastender VA:</strong> Auferlegt dem Adressaten eine Pflicht, lehnt eine beantragte Begünstigung ab oder hebt eine bestehende Begünstigung auf. Vor Erlass ist grundsätzlich eine Anhörung nötig (§ 28 VwVfG). (Bsp.: Ordnungsverfügung, Ablehnung eines Bauantrags, Widerruf der Gaststättenerlaubnis).</li>
+                        <li><strong>VA mit Doppelwirkung:</strong> Ist für dieselbe Person zugleich begünstigend und belastend. (Bsp.: Eine beantragte Subvention von 10.000 € wird nur in Höhe von 5.000 € gewährt – Begünstigung i.H.v. 5.000 €, Belastung durch die Ablehnung des Rests).</li>
+                        <li><strong>VA mit Drittwirkung:</strong> Begünstigt den Adressaten, greift aber zugleich in die Rechtssphäre eines Dritten ein. Dies ist ein hoch klausurrelevanter Fall, insbesondere im Baurecht. (Bsp.: Die Baugenehmigung für A (begünstigend) verletzt nachbarschützende Vorschriften und beeinträchtigt damit den Nachbarn N (belastend)). Der Dritte kann den VA ebenfalls anfechten.</li>
+                    </ul>
+
+                     <h4>Übungsfall zur Allgemeinverfügung</h4>
+
+                    <div class="exercise-container">
+                        <h5>Fall: Das Verkaufsverbot</h5>
+                        <p>Wegen einer ausgebrochenen Seuche in der Stadt Eiskaltingen verbietet die zuständige Behörde allen Lebensmittelverkäufern im Stadtgebiet den Verkauf von rohem Fleisch bis auf Weiteres.</p>
+                        <strong>Frage:</strong> Handelt es sich bei dem Verkaufsverbot um einen Verwaltungsakt oder um eine Rechtsnorm (materielles Gesetz)?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Es handelt sich um einen Verwaltungsakt in Form einer Allgemeinverfügung.</strong></p>
+                           <p>Die Abgrenzung zwischen einem VA (konkret-generell) und einer Rechtsnorm (abstrakt-generell) erfolgt danach, ob ein <strong>konkreter Sachverhalt</strong> oder eine unbestimmte Vielzahl von Fällen geregelt wird.</p>
+                           <ul>
+                            <li><strong>Konkret vs. Abstrakt:</strong> Das Verbot knüpft an die <strong>aktuell ausgebrochene Seuche</strong> an. Es regelt also einen bestimmten, einmaligen Sachverhalt und ist damit <strong>konkret</strong>. Eine abstrakte Regelung würde den Fall einer Seuche allgemein regeln, ohne Bezug zu einem aktuellen Ereignis.</li>
+                            <li><strong>Individuell vs. Generell:</strong> Das Verbot richtet sich an "alle Lebensmittelverkäufer" im Stadtgebiet. Der Personenkreis ist nicht individuell bestimmt, aber nach allgemeinen Merkmalen bestimmbar. Die Regelung ist also <strong>generell</strong>.</li>
+                           </ul>
+                           <p>Eine konkret-generelle Regelung ist laut § 35 S. 2 VwVfG ein Verwaltungsakt in Form einer <strong>Allgemeinverfügung</strong> (hier: eine personenbezogene Allgemeinverfügung, da sie sich an einen nach allgemeinen Merkmalen bestimmten Personenkreis richtet).</p>
+                        </div>
+                    </div>
+                `
+            },
+            wirksamkeit: {
+                title: 'Wirksamkeit & Bekanntgabe des VA',
+                 content: `
+                    <div class="h2-container">
+                        <h2>Wirksamkeit & Bekanntgabe des Verwaltungsaktes</h2>
+                        <button class="summary-toggle-btn" data-summary="wirksamkeit_summary">Kernpunkte</button>
+                    </div>
+                    <div id="wirksamkeit_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Grundsatz:</strong> Ein VA wird mit Bekanntgabe wirksam (§ 43 Abs. 1 VwVfG). Auch ein rechtswidriger VA ist wirksam, außer er ist nichtig (§ 44 VwVfG).</li>
+                            <li><strong>Bekanntgabe:</strong> Wissentliche und willentliche Eröffnung des Inhalts in amtlicher Eigenschaft an den richtigen Adressaten.</li>
+                            <li><strong>Arten der Bekanntgabe (§ 41 VwVfG):</strong> Nichtförmlich (mündlich, einfacher Brief mit 3-Tages-Fiktion), förmlich (Zustellung mit PZU), öffentlich.</li>
+                            <li><strong>Bestandskraft:</strong> Unanfechtbarkeit des VA nach Ablauf der Rechtsbehelfsfrist (i.d.R. 1 Monat).</li>
+                        </ul>
+                    </div>
+                    <p>Ein Verwaltungsakt muss nicht nur rechtmäßig sein, er muss auch wirksam sein, um Rechtsfolgen auszulösen. Die Wirksamkeit ist von der Rechtmäßigkeit zu trennen. Auch ein rechtswidriger VA ist zunächst wirksam! (§ 43 Abs. 3 VwVfG). Nur ein nichtiger VA (§ 44 VwVfG) ist von Anfang an unwirksam.</p>
+
+                    <h3>1. Wirksamkeit durch Bekanntgabe (§ 43 Abs. 1 VwVfG)</h3>
+                    <p>Ein VA wird in dem Zeitpunkt wirksam, in dem er demjenigen, für den er bestimmt ist oder der von ihm betroffen wird, <strong>bekannt gegeben</strong> wird. Ohne Bekanntgabe existiert der VA rechtlich nicht (sog. "Nicht-Akt").</p>
+                    <h4>Voraussetzungen der Bekanntgabe:</h4>
+                    <ul>
+                        <li><strong>Wissentliche und willentliche Eröffnung:</strong> Die Behörde muss den Inhalt des VA dem Adressaten bewusst und gewollt zur Kenntnis bringen. Ein zufällig zur Kenntnis gelangter Entwurf ist keine Bekanntgabe.</li>
+                        <li><strong>In amtlicher Eigenschaft:</strong> Die Mitteilung muss offiziell erfolgen, nicht privat.</li>
+                        <li><strong>An den richtigen Adressaten:</strong> oder dessen Bevollmächtigten (§ 41 Abs. 1 VwVfG).</li>
+                        <li><strong>Zugang:</strong> Der VA muss so in den Machtbereich des Empfängers gelangen, dass dieser unter normalen Umständen von ihm Kenntnis nehmen kann.</li>
+                    </ul>
+
+                    <h3>2. Arten der Bekanntgabe (§ 41 VwVfG)</h3>
+                    <h4>Nichtförmliche Bekanntgabe</h4>
+                    <ul>
+                        <li><strong>Mündlich:</strong> Mit dem Vernehmen der Erklärung.</li>
+                        <li><strong>Einfacher Brief (§ 41 Abs. 2 VwVfG):</strong> Hier gilt eine <strong>Zugangsfiktion</strong>. Ein schriftlicher VA, der im Inland durch die Post übermittelt wird, gilt am <strong>dritten Tag nach der Aufgabe zur Post</strong> als bekannt gegeben. 
+                        <div class="klausur-hinweis"><strong>Klausurhinweis:</strong> Dies ist eine widerlegbare Vermutung. Behauptet der Empfänger, den VA gar nicht oder später erhalten zu haben, muss die Behörde den Zugang beweisen. Geht der Brief nachweislich früher zu, ändert das für die Fiktion des § 41 (2) S. 1 VwVfG nach h.M. nichts. Der Tag der Aufgabe zählt bei der Frist nicht mit. Beispiel: Aufgabe am Montag -> Fiktion gilt am Donnerstag. Fällt das Fristende auf einen Sa, So oder Feiertag, verschiebt es sich nicht!</div></li>
+                    </ul>
+                     <h4>Förmliche Bekanntgabe (Zustellung)</h4>
+                     <p>Die Zustellung nach dem Landeszustellungsgesetz (LZG) oder Verwaltungszustellungsgesetz (VwZG) wird gewählt, wenn der Nachweis des Zugangs besonders wichtig ist (z.B. bei Fristbeginn für Rechtsbehelfe). Typische Formen sind:</p>
+                     <ul>
+                        <li><strong>Zustellung mittels Postzustellungsurkunde (PZU):</strong> Der "gelbe Brief". Der Postbote beurkundet das Datum der Zustellung. Dies erbringt den vollen Beweis des Zugangs.</li>
+                        <li><strong>Einschreiben mit Rückschein:</strong> Der Rückschein dient als Nachweis.</li>
+                     </ul>
+                      <h4>Öffentliche Bekanntgabe (§ 41 Abs. 3, 4 VwVfG)</h4>
+                      <p>Nur unter engen Voraussetzungen zulässig, z.B. bei Allgemeinverfügungen, wenn eine Einzelbekanntgabe untunlich ist, oder wenn der Aufenthaltsort des Adressaten unbekannt ist. Der VA gilt dann zwei Wochen nach der ortsüblichen Bekanntmachung als bekannt gegeben.</p>
+
+                    <h3>3. Bestandskraft</h3>
+                    <p>Ein VA wird <strong>bestandskräftig</strong> (oder unanfechtbar), wenn er nicht mehr mit ordentlichen Rechtsbehelfen (Widerspruch, Anfechtungsklage) angegriffen werden kann. Dies tritt ein, wenn die Rechtsbehelfsfrist (i.d.R. ein Monat nach Bekanntgabe, § 70, 74 VwGO) abgelaufen ist. Ein einmal bestandskräftiger VA ist – auch wenn er rechtswidrig war – grundsätzlich bindend und muss befolgt werden.</p>
+
+                    <h4>Übungsfälle zu Bekanntgabe und Fristberechnung</h4>
+
+                    <div class="exercise-container">
+                        <h5>Fall 1: Die versehentliche Abrissverfügung</h5>
+                        <p>Der schusselige S, Sachbearbeiter der Baubehörde, verwechselt oft Akten. Versehentlich gibt er eine an X adressierte amtliche Abrissverfügung, die eigentlich in den Papierkorb wandern sollte, zur Post auf. Daraufhin erhält X die Abrissverfügung.</p>
+                        <strong>Frage:</strong> Wurde die Abrissverfügung dem X ordnungsgemäß bekanntgegeben?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Nein.</strong> Eine Bekanntgabe im Rechtssinne liegt nur dann vor, wenn die Behörde in amtlicher Eigenschaft mit <strong>Bekanntgabewillen</strong> den Inhalt des Verwaltungsakts dem Betroffenen gegenüber eröffnet. Hier wollte der Sachbearbeiter S die Abrissverfügung vernichten und nicht dem X bekanntgeben. Er handelte damit ohne den erforderlichen Bekanntgabewillen.</p>
+                           <p>Da es an einer wirksamen Bekanntgabe fehlt, ist die Abrissverfügung gegenüber X nicht wirksam geworden (§ 43 Abs. 1 VwVfG). Es handelt sich um einen rechtlich nicht existenten Verwaltungsakt (sog. "Nicht-Akt").</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h5>Fall 2: Die verspätete Klage</h5>
+                        <p>K hat Widerspruch gegen eine Nutzungsuntersagung erhoben. Der Widerspruchsbescheid wird am 10.01. (Dienstag) per Übergabeeinschreiben zur Post gegeben. K erhebt am 15.02. (Mittwoch) Klage.</p>
+                        <strong>Frage:</strong> Hat K die Klage fristgerecht erhoben?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Nein, die Klage ist verfristet.</strong></p>
+                           <ol>
+                                <li><strong>Bekanntgabe:</strong> Bei Zustellung per Einschreiben gilt der VA am dritten Tag nach Aufgabe zur Post als zugestellt/bekanntgegeben (vgl. § 4 Abs. 2 S. 2 VwZG, § 41 Abs. 2 VwVfG). Aufgabe war am 10.01. Der dritte Tag danach ist der <strong>13.01.</strong> (Fr). Die Bekanntgabe ist also am 13.01. erfolgt.</li>
+                                <li><strong>Klagefrist:</strong> Die Anfechtungsklage ist innerhalb eines Monats nach Zustellung des Widerspruchsbescheids zu erheben (§ 74 Abs. 1 S. 1 VwGO).</li>
+                                <li><strong>Fristbeginn:</strong> Die Frist beginnt am Tag nach dem Ereignis (Bekanntgabe), also am <strong>14.01. um 0:00 Uhr</strong> (§ 187 Abs. 1 BGB).</li>
+                                <li><strong>Fristende:</strong> Die Frist endet mit Ablauf desjenigen Tages des Folgemonats, der durch seine Zahl dem Tag der Bekanntgabe entspricht (§ 188 Abs. 2 BGB). Das Ereignis (Bekanntgabe) war am 13.01. Das Fristende ist also der <strong>13.02. um 24:00 Uhr</strong>.</li>
+                           </ol>
+                           <p>K hat die Klage erst am 15.02. eingereicht und damit die Frist versäumt. Die Klage wäre als unzulässig abzuweisen.</p>
+                        </div>
+                    </div>
+                `
+            },
+            nebenbestimmungen: {
+                title: 'Nebenbestimmungen zum Verwaltungsakt',
+                content: `
+                    <div class="h2-container">
+                        <h2>Nebenbestimmungen zum Verwaltungsakt (§ 36 VwVfG)</h2>
+                        <button class="summary-toggle-btn" data-summary="nebenbestimmungen_summary">Kernpunkte</button>
+                    </div>
+                    <div id="nebenbestimmungen_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Zweck:</strong> Flexibilisierung des Verwaltungshandelns ("Ja, aber...").</li>
+                            <li><strong>Arten (§ 36 Abs. 2 VwVfG):</strong> Befristung (gewiss), Bedingung (ungewiss), Widerrufsvorbehalt, Auflage, Auflagenvorbehalt.</li>
+                            <li><strong>Abgrenzung Auflage vs. Bedingung:</strong> Entscheidend für Wirksamkeit des Haupt-VA. Auflage = Haupt-VA wirksam + Zusatzpflicht. Aufschiebende Bedingung = Haupt-VA erst bei Bedingungseintritt wirksam. Im Zweifel Auflage.</li>
+                            <li><strong>Rechtsschutz:</strong> Isolierte Anfechtungsklage gegen die Nebenbestimmung möglich.</li>
+                        </ul>
+                    </div>
+                    <p>Nebenbestimmungen sind Zusätze zu einem VA, die dessen Hauptregelung modifizieren. Sie sind ein wichtiges Instrument für flexibles Verwaltungshandeln. Ihre Zulässigkeit ist in § 36 VwVfG geregelt.</p>
+                    
+                    <h3>Zulässigkeit von Nebenbestimmungen</h3>
+                    <ul>
+                        <li><strong>Bei gebundenen Entscheidungen (Muss-Vorschriften):</strong> Nebenbestimmungen sind nur zulässig, wenn sie durch eine Rechtsvorschrift ausdrücklich zugelassen sind (§ 36 Abs. 1 VwVfG).</li>
+                        <li><strong>Bei Ermessensentscheidungen (Kann-Vorschriften):</strong> Nebenbestimmungen sind zulässig, wenn sie dazu dienen, die gesetzlichen Voraussetzungen des VA sicherzustellen oder wenn sie dem Zweck der Ermessensnorm entsprechen.</li>
+                        <li><strong>Allgemeine Anforderung:</strong> Die Nebenbestimmung selbst muss verhältnismäßig sein und darf dem Zweck des Haupt-VA nicht widersprechen (§ 36 Abs. 3 VwVfG).</li>
+                    </ul>
+
+                    <h3>Arten von Nebenbestimmungen (§ 36 Abs. 2 VwVfG)</h3>
+                    <ul>
+                        <li><strong>Befristung (Nr. 1):</strong> Wirksamkeit beginnt/endet zu einem <strong>gewissen</strong> zukünftigen Zeitpunkt (z.B. Genehmigung gilt bis zum 31.12.).</li>
+                        <li><strong>Bedingung (Nr. 2):</strong> Wirksamkeit hängt von einem <strong>ungewissen</strong> zukünftigen Ereignis ab.
+                            <ul>
+                                <li><em>Aufschiebende Bedingung:</em> "Die Genehmigung wird wirksam, <strong>sobald</strong> Sie den Lärmschutz nachweisen." Der VA ist bis dahin unwirksam.</li>
+                                <li><em>Auflösende Bedingung:</em> "Die Förderung wird gewährt, erlischt aber, <strong>falls</strong> Sie Ihren Wohnsitz verlegen." Der VA ist sofort wirksam.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Widerrufsvorbehalt (Nr. 3):</strong> Die Behörde behält sich den Widerruf für die Zukunft vor. Dies schränkt den Vertrauensschutz des Bürgers ein und erleichtert eine spätere Aufhebung (§ 49 Abs. 2 Nr. 1 VwVfG).</li>
+                        <li><strong>Auflage (Nr. 4):</strong> Dem begünstigten VA wird eine selbstständige Verpflichtung zu einem Tun, Dulden oder Unterlassen hinzugefügt. Der Haupt-VA ist sofort und uneingeschränkt wirksam, die Auflage begründet lediglich eine zusätzliche, durchsetzbare Pflicht. <strong>Beispiel:</strong> "Die Baugenehmigung wird erteilt. Sie müssen 10 Bäume pflanzen."</li>
+                        <li><strong>Auflagenvorbehalt (Nr. 5):</strong> Die Behörde behält sich vor, später noch eine Auflage zu erlassen.</li>
+                    </ul>
+
+                    <div class="klausur-hinweis"><strong>Klausurklassiker: Abgrenzung Auflage vs. Bedingung.</strong> Die Abgrenzung ist entscheidend für die Wirksamkeit des Haupt-VA. Der Wille der Behörde ist durch Auslegung (§ 133, 157 BGB analog) zu ermitteln. Im Zweifel, ob eine aufschiebende Bedingung oder eine Auflage gewollt ist, ist von einer <strong>Auflage</strong> auszugehen, da sie für den Bürger die günstigere Variante ist (der Haupt-VA wird sofort wirksam).</div>
+
+                    <h3>Sonderform: Die modifizierte Auflage</h3>
+                    <p>Die modifizierte Auflage ist keine Nebenbestimmung im Sinne des § 36 VwVfG, sondern stellt rechtlich eine <strong>teilweise Ablehnung des Antrags verbunden mit einem neuen Angebot</strong> (dem geänderten Verwaltungsakt) dar. Der Antragsteller beantragt "X", erhält aber "Y".</p>
+                    <p>Beispiel: Anstelle einer beantragten Baugenehmigung für ein Haus mit Flachdach ergeht eine Genehmigung "mit der Auflage", ein Satteldach zu errichten. Dies ist in Wahrheit eine modifizierte Genehmigung. Verstößt der Bürger dagegen und baut ein Flachdach, handelt er ohne die erforderliche Genehmigung.</p>
+
+                    <h3>Rechtsschutz gegen Nebenbestimmungen</h3>
+                    <p>Gegen eine rechtswidrige Nebenbestimmung kann der Bürger sich wehren, ohne den begünstigenden Haupt-Verwaltungsakt zu gefährden. Dies geschieht mittels einer <strong>isolierten Anfechtungsklage</strong>. Damit wird nur die Nebenbestimmung isoliert zur gerichtlichen Überprüfung gestellt.</p>
+                     <div class="klausur-hinweis"><strong>Wichtig:</strong> Eine isolierte Anfechtung ist nur zulässig, wenn der Haupt-VA auch ohne die Nebenbestimmung eine sinnvolle und rechtmäßige Regelung bleibt. Ist die Nebenbestimmung untrennbar mit dem Haupt-VA verbunden (wie bei der modifizierten Auflage), muss der gesamte VA angefochten werden, meist mit einer Verpflichtungsklage auf Erlass des ursprünglich beantragten VA ohne die belastende Änderung.</div>
+                     
+                     <h4>Übungsfälle zu Nebenbestimmungen</h4>
+                     <div class="exercise-container">
+                        <h5>Fall 1: Das Straßenfest</h5>
+                        <p>Anlässlich eines geplanten Straßenfests beantragt Anwohner A eine Sondernutzungserlaubnis. Die Behörde erteilt die Genehmigung, legt im Bescheid aber fest, dass A während der Dauer des Festes mindestens zehn mobile Toilettenanlagen im Veranstaltungsbereich aufstellen muss.</p>
+                        <strong>Frage:</strong> Um welche Art von Nebenbestimmung handelt es sich bei der Pflicht zur Aufstellung der Toiletten?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p>Es handelt sich um eine <strong>Auflage</strong> gemäß § 36 Abs. 2 Nr. 4 VwVfG.</p>
+                           <p><strong>Begründung:</strong> Der Haupt-VA (die Sondernutzungserlaubnis) ist sofort und uneingeschränkt wirksam. Die Verpflichtung, Toiletten aufzustellen, ist eine zusätzliche, selbstständig erzwingbare Pflicht, die neben den begünstigenden Haupt-VA tritt. Die Wirksamkeit der Erlaubnis hängt nicht vom Aufstellen der Toiletten ab. A darf das Fest also auch dann veranstalten, wenn er (pflichtwidrig) die Toiletten nicht aufstellt, müsste dann aber mit einer separaten Vollstreckung der Auflage rechnen.</p>
+                        </div>
+                    </div>
+                     <div class="exercise-container">
+                        <h5>Fall 2: Die Verbrennungsanlage</h5>
+                        <p>Ein Unternehmen erhält die Erlaubnis zum Betrieb einer Verbrennungsanlage. Im Genehmigungsbescheid heißt es, die Erlaubnis werde erteilt, "sobald ein ganz bestimmter Filter eingebaut ist".</p>
+                        <strong>Frage:</strong> Um welche Art von Nebenbestimmung handelt es sich?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p>Es handelt sich um eine <strong>aufschiebende Bedingung</strong> gemäß § 36 Abs. 2 Nr. 2 VwVfG.</p>
+                           <p><strong>Begründung:</strong> Die Wirksamkeit der Genehmigung hängt vom Eintritt eines zukünftigen, ungewissen Ereignisses ab (dem Einbau des Filters). Die Formulierung "sobald..." (oder "wenn...") deutet klar darauf hin, dass der Verwaltungsakt erst wirksam werden soll, wenn die Bedingung erfüllt ist. Vor dem Einbau des Filters ist die Genehmigung also noch nicht wirksam und der Betrieb der Anlage nicht erlaubt.</p>
+                        </div>
+                    </div>
+                     <div class="exercise-container">
+                        <h5>Fall 3: Das Walmdach</h5>
+                        <p>W beantragt eine Baugenehmigung für einen Pferdestall mit Pultdach. Die zuständige Behörde genehmigt den Bau eines Stalls unter der Maßgabe, dass W anstelle des Pultdachs ein Walmdach bauen muss.</p>
+                        <strong>Frage:</strong> Handelt es sich hierbei um eine Nebenbestimmung?
+                        <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Nein.</strong> Es handelt sich hierbei um eine <strong>modifizierte Auflage</strong>. Diese ist keine Nebenbestimmung im Sinne des § 36 VwVfG, sondern eine teilweise Ablehnung des Antrags bei gleichzeitigem Angebot, einen anderen VA zu erlassen (hier: Genehmigung für ein Walmdach statt Pultdach). Die Anordnung ist untrennbar mit dem Haupt-VA verbunden. W kann hier nur den gesamten Bescheid anfechten mit dem Ziel, die ursprünglich beantragte Genehmigung zu erhalten.</p>
+                        </div>
+                    </div>
+                `
+            },
+            rechtmaessigkeit: {
+                title: 'Rechtmäßigkeit des Verwaltungsaktes',
+                content: `
+                    <div class="h2-container">
+                        <h2>Prüfung der Rechtmäßigkeit</h2>
+                        <button class="summary-toggle-btn" data-summary="rechtmaessigkeit_summary">Kernpunkte</button>
+                    </div>
+                    <div id="rechtmaessigkeit_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Formelle Rechtmäßigkeit:</strong> Prüft das "Wie" des Zustandekommens (Zuständigkeit, Verfahren, Form).</li>
+                            <li><strong>Materielle Rechtmäßigkeit:</strong> Prüft das "Was" des Inhalts (Ermächtigungsgrundlage, Tatbestandsvoraussetzungen, richtige Rechtsfolge).</li>
+                            <li><strong>Wichtige formelle Punkte:</strong> Anhörung (§ 28), Begründung (§ 39), Bestimmtheit (§ 37). Fehler können heilbar (§ 45) oder unbeachtlich (§ 46) sein.</li>
+                            <li><strong>Wichtige materielle Punkte:</strong> Subsumtion unter die Tatbestandsmerkmale, fehlerfreie Ermessensausübung, Verhältnismäßigkeit.</li>
+                        </ul>
+                    </div>
+                    <p>Die Rechtmäßigkeit eines VA wird in einer Klausur systematisch in zwei großen Blöcken geprüft: formelle und materielle Rechtmäßigkeit.</p>
+                    
+                    <h3>A. Formelle Rechtmäßigkeit</h3>
+                    <p>Hier wird geprüft, ob der VA "nach den Spielregeln" zustande gekommen ist.</p>
+                    <h4>I. Zuständigkeit</h4>
+                    <p>Die erlassende Behörde muss zuständig sein: sachlich, örtlich und instanziell.</p>
+                    <h4>II. Verfahren</h4>
+                     <ul>
+                        <li><strong>Anhörung (§ 28 VwVfG):</strong> Vor Erlass eines belastenden VA muss dem Betroffenen Gelegenheit zur Stellungnahme gegeben werden. <strong>Wichtig:</strong> Ausnahmen in Abs. 2 prüfen (z.B. Gefahr im Verzug)! Ein Verstoß kann nach § 45 Abs. 1 Nr. 3 VwVfG geheilt werden.</li>
+                        <li><strong>Akteneinsicht (§ 29 VwVfG):</strong> Der Beteiligte hat grundsätzlich ein Recht auf Einsicht in die Akten.</li>
+                        <li><strong>Kein Ausschluss / keine Befangenheit (§§ 20, 21 VwVfG).</strong></li>
+                    </ul>
+                    <h4>III. Form</h4>
+                     <ul>
+                        <li><strong>Grundsatz der Formfreiheit (§ 37 Abs. 2 VwVfG).</strong></li>
+                        <li><strong>Bestimmtheit (§ 37 Abs. 1 VwVfG):</strong> Der Adressat muss klar erkennen können, was von ihm verlangt wird.</li>
+                        <li><strong>Begründung (§ 39 VwVfG):</strong> Schriftliche VAs müssen i.d.R. begründet werden. Eine fehlende Begründung kann nach § 45 Abs. 1 Nr. 2 VwVfG nachgeholt werden.</li>
+                        <li><strong>Rechtsbehelfsbelehrung (§ 58 VwGO):</strong> Eine fehlende oder falsche Belehrung macht den VA nicht rechtswidrig, verlängert aber die Rechtsbehelfsfrist von einem Monat auf ein Jahr!</li>
+                    </ul>
+
+                    <h3>B. Materielle Rechtmäßigkeit</h3>
+                    <p>Hier wird geprüft, ob der Inhalt des VA mit dem Gesetz übereinstimmt.</p>
+                    <h4>I. Ermächtigungsgrundlage</h4>
+                    <p>Für jeden eingreifenden VA muss es eine gesetzliche Grundlage geben (Vorbehalt des Gesetzes).</p>
+                    <h4>II. Tatbestandsvoraussetzungen der Ermächtigungsgrundlage</h4>
+                    <p>Die im "Wenn-Teil" der Norm genannten Voraussetzungen müssen vorliegen. Dies ist der Schwerpunkt der Subsumtion.</p>
+                    <h4>III. Richtiger Adressat</h4>
+                    <p>Die Maßnahme muss sich an die Person richten, die nach Gesetz verantwortlich ist (z.B. Störer).</p>
+                    <h4>IV. Rechtsfolge</h4>
+                    <p>Die im "Dann-Teil" der Norm angeordnete Folge muss vom Gesetz gedeckt sein.</p>
+                    <ul>
+                        <li><strong>Gebundene Entscheidung ("ist", "muss"):</strong> Kein Spielraum.</li>
+                        <li><strong>Ermessensentscheidung ("kann", "darf"):</strong> Spielraum der Behörde, der fehlerfrei ausgeübt werden muss.</li>
+                        <li><strong>Verhältnismäßigkeit:</strong> Die Maßnahme muss geeignet, erforderlich und angemessen sein. Dies ist ein zentraler Prüfungspunkt!</li>
+                    </ul>
+
+                    <h4>Übungsfälle zur Rechtmäßigkeit</h4>
+                    <div class="exercise-container">
+                        <h5>Fall 1: Die Kneipe "Sorgenbrecher" (Formelle Rechtmäßigkeit)</h5>
+                        <p>Leon Langschläfer (L) betreibt die Kneipe "Sorgenbrecher". Da er zunehmend dem Alkohol verfällt, widerruft die zuständige Behörde seine Gaststättenerlaubnis. Der Bescheid kommt für L völlig überraschend, er wurde zuvor nicht kontaktiert. Die Begründung des Bescheids ist in knapper Stichpunktform abgefasst und enthält keine rechtliche Herleitung.</p>
+                        <strong>Frage:</strong> Ist der Widerruf formell rechtmäßig?
+                         <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Nein, der Widerruf ist formell rechtswidrig.</strong> Es liegen mehrere formelle Fehler vor:</p>
+                           <ul>
+                            <li><strong>Fehlende Anhörung:</strong> Der Widerruf der Erlaubnis ist ein belastender VA, der in die Berufsfreiheit (Art. 12 GG) des L eingreift. Nach § 28 Abs. 1 VwVfG hätte L daher zwingend angehört werden müssen. Dies ist unterblieben. Der Fehler könnte aber nach § 45 Abs. 1 Nr. 3 VwVfG geheilt werden.</li>
+                            <li><strong>Mangelhafte Begründung:</strong> Ein schriftlicher VA muss nach § 39 Abs. 1 VwVfG die wesentlichen tatsächlichen und rechtlichen Gründe mitteilen, die die Behörde zu ihrer Entscheidung bewogen haben. Eine stichpunktartige Aufzählung ohne rechtliche Herleitung genügt diesen Anforderungen nicht. Auch dieser Fehler ist nach § 45 Abs. 1 Nr. 2 VwVfG heilbar.</li>
+                           </ul>
+                           <p>Solange die Fehler nicht geheilt werden, ist der VA formell rechtswidrig und damit anfechtbar.</p>
+                        </div>
+                    </div>
+                     <div class="exercise-container">
+                        <h5>Fall 2: Die Kneipe "Sorgenbrecher" (Materielle Rechtmäßigkeit)</h5>
+                        <p>Im Fall von Leon Langschläfer (siehe oben) stellt die Behörde fest, dass L sich regelmäßig betrinkt, Gäste nicht mehr ordnungsgemäß bedienen kann und dadurch eine Gefahr für den ordnungsgemäßen Betrieb darstellt. Die einschlägige Norm (§ 15 Abs. 2 GastG i.V.m. § 4 Abs. 1 Nr. 1 GastG) besagt, dass die Erlaubnis zu widerrufen <strong>ist</strong>, wenn der Betreiber die erforderliche Zuverlässigkeit nicht besitzt, insbesondere dem Trunke ergeben ist.</p>
+                        <strong>Frage:</strong> Ist der Widerruf materiell rechtmäßig?
+                         <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Ja, der Widerruf ist materiell rechtmäßig.</strong></p>
+                            <ul>
+                                <li><strong>Ermächtigungsgrundlage:</strong> § 15 Abs. 2 GastG ist die zutreffende Ermächtigungsgrundlage.</li>
+                                <li><strong>Tatbestandsvoraussetzungen:</strong> Die Norm setzt voraus, dass Tatsachen die Annahme rechtfertigen, der Betreiber sei unzuverlässig, insbesondere "dem Trunke ergeben". Das ist bei L der Fall. Sein regelmäßiger und starker Alkoholkonsum, der zu einer Beeinträchtigung des Betriebs führt, erfüllt die Voraussetzungen der Unzuverlässigkeit.</li>
+                                <li><strong>Rechtsfolge:</strong> Die Norm verwendet das Wort "ist" ("ist zu widerrufen"). Es handelt sich um eine <strong>gebundene Entscheidung</strong>. Die Behörde hat kein Ermessen. Da die Tatbestandsvoraussetzungen vorliegen, musste sie die Erlaubnis widerrufen. Die Rechtsfolge ist daher zwingend und somit rechtmäßig.</li>
+                           </ul>
+                        </div>
+                    </div>
+                `
+            },
+            ermessensfehler: {
+                title: 'Ermessensfehler in der Klausur',
+                content: `
+                    <div class="h2-container">
+                        <h2>Ermessensfehler (§ 40 VwVfG, § 114 S. 1 VwGO)</h2>
+                        <button class="summary-toggle-btn" data-summary="ermessensfehler_summary">Kernpunkte</button>
+                    </div>
+                    <div id="ermessensfehler_summary" class="summary-content hidden">
+                        <ul>
+                            <li><strong>Ermessensnichtgebrauch:</strong> Behörde erkennt ihr Ermessen nicht und wägt nicht ab.</li>
+                            <li><strong>Ermessensüberschreitung:</strong> Gewählte Rechtsfolge ist gesetzlich nicht vorgesehen.</li>
+                            <li><strong>Ermessensfehlgebrauch:</strong> Sachfremde Erwägungen, Verstoß gegen Grundrechte (v.a. Verhältnismäßigkeit, Gleichheitssatz).</li>
+                            <li><strong>Ermessensreduzierung auf Null:</strong> In Ausnahmefällen ist nur eine Entscheidung rechtmäßig.</li>
+                        </ul>
+                    </div>
+                    <p>Wenn die Ermächtigungsgrundlage der Behörde einen Spielraum einräumt ("kann", "darf"), prüft das Gericht nur, ob die Behörde ihr Ermessen fehlerfrei ausgeübt hat. Ein Ermessensfehler führt zur Rechtswidrigkeit des VA. Die Prüfung orientiert sich an den drei klassischen Fehlerkategorien.</p>
+
+                    <h3>1. Ermessensnichtgebrauch (oder Ermessensausfall)</h3>
+                    <p>Die Behörde hat nicht erkannt, dass ihr Ermessen zusteht, und hat es deshalb gar nicht ausgeübt. Sie glaubt fälschlicherweise, zu einer bestimmten Entscheidung gezwungen zu sein.</p>
+                    <div class="klausur-hinweis"><strong>Formulierung in der Klausur:</strong> "Die Behörde ging irrig von einer gebundenen Entscheidung aus. Ausweislich der Aktennotiz '...da mussten wir so entscheiden...' hat sie keine Alternativen oder die Interessen des Betroffenen abgewogen. Sie hat ihr Ermessen somit nicht gebraucht."</div>
+
+                    <h3>2. Ermessensüberschreitung</h3>
+                    <p>Die Behörde wählt eine Rechtsfolge, die gesetzlich nicht (mehr) vorgesehen ist. Sie geht über den vom Gesetz gezogenen Rahmen hinaus.</p>
+
+                    <h3>3. Ermessensfehlgebrauch (oder Ermessensmissbrauch)</h3>
+                    <p>Dies ist der häufigste und anspruchsvollste Ermessensfehler. Die Behörde hält sich zwar formal an den gesetzlichen Rahmen, aber die Art und Weise ihrer Entscheidungsfindung ist fehlerhaft. Die wichtigsten Fallgruppen sind:</p>
+                    <ul>
+                        <li><strong>Zweckfremde Erwägungen:</strong> Die Behörde verfolgt Ziele, die von der Ermächtigungsgrundlage nicht gedeckt sind.</li>
+                        <li><strong>Verstoß gegen Grundrechte:</strong> Insbesondere der <strong>Gleichbehandlungsgrundsatz (Art. 3 GG)</strong> und der <strong>Grundsatz der Verhältnismäßigkeit</strong> sind hier zu prüfen.</li>
+                        <li><strong>Sachfremde Erwägungen:</strong> Heranziehen von Kriterien, die mit dem Fall nichts zu tun haben.</li>
+                    </ul>
+                    
+                    <h4>Übungsfälle zu Ermessensfehlern</h4>
+                     <div class="exercise-container">
+                        <h5>Fall 1: Die Abrissverfügung</h5>
+                        <p>Die Behörde B erlässt gegenüber Herrn Huber eine Abrissverfügung. Laut B steht Hubers Gebäude im Widerspruch zum öffentlichen Baurecht, sodass „keine andere Wahl“ bestehe, als den Abriss anzuordnen. Die Ermächtigungsgrundlage (§ 82 Abs. 1 BauO NRW) besagt, die Behörde "kann" den Abriss anordnen, wenn nicht auf andere Weise rechtmäßige Zustände hergestellt werden können.</p>
+                        <strong>Frage:</strong> Hat die Behörde ermessensfehlerhaft gehandelt?
+                         <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Ja, es liegt ein Ermessensnichtgebrauch vor.</strong></p>
+                           <p>Die Formulierung "kann" in der Rechtsnorm räumt der Behörde Ermessen ein. Sie hätte also prüfen müssen, ob es Alternativen zum Abriss gibt (z.B. eine Nutzungsuntersagung) und die Interessen abwägen müssen. Die Aussage, es habe "keine andere Wahl" bestanden, zeigt, dass die Behörde ihr Ermessen nicht erkannt und somit nicht ausgeübt hat. Sie ging fälschlicherweise von einer gebundenen Entscheidung aus.</p>
+                        </div>
+                    </div>
+                     <div class="exercise-container">
+                        <h5>Fall 2: Die Reinigungsgebühr</h5>
+                        <p>Eine Gemeindesatzung sieht vor, dass die Behörde für die Reinigung verschmutzter Hofzufahrten eine Gebühr zwischen 30 und 50 Euro erheben "kann". Beamter B ist verärgert über den Zustand der Hofzufahrt von Bürger A und setzt eine Gebühr von 80 Euro fest, um "ein Exempel zu statuieren".</p>
+                        <strong>Frage:</strong> Liegt ein Ermessensfehler vor?
+                         <button class="solution-toggle-btn">Lösung anzeigen</button>
+                        <div class="solution-content hidden">
+                           <p><strong>Ja, es liegt eine Ermessensüberschreitung vor.</strong></p>
+                           <p>Der gesetzliche Rahmen für die Gebühr liegt zwischen 30 und 50 Euro. Indem B eine Gebühr von 80 Euro festsetzt, wählt er eine Rechtsfolge, die vom Gesetz nicht mehr gedeckt ist. Er überschreitet den ihm durch die Satzung zugestandenen Ermessensrahmen. Die Festsetzung der Gebühr in dieser Höhe ist daher rechtswidrig.</p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // KORRIGIERT & VERVOLLSTÄNDIGT: Objekt mit den Zusammenfassungen für die Karteikarten
+        const flashcardSummaries = {
+            '1. Vorrang des Gesetzes': `<ul><li>Bedeutet: Kein Verwaltungshandeln darf gegen geltendes Recht verstoßen.</li><li>Umfasst die gesamte Rechtsordnung (Verfassung, Gesetze, Verordnungen etc.).</li><li>Verstoß führt zur Rechtswidrigkeit der Maßnahme.</li></ul>`,
+            '2. Vorbehalt des Gesetzes': `<ul><li>Bedeutet: Verwaltungshandeln bedarf einer gesetzlichen Grundlage.</li><li>Gilt insbesondere für die Eingriffsverwaltung (Eingriffe in Rechte der Bürger).</li><li>Schützt vor willkürlichem Handeln ohne gesetzliche Befugnis.</li></ul>`,
+            '1. Legitimer Zweck': `<ul><li>Jede staatliche Handlung benötigt einen Zweck, der rechtlich zulässig ist und dem Allgemeinwohl dient.</li></ul>`,
+            '2. Geeignetheit': `<ul><li>Die Maßnahme muss objektiv tauglich sein, den Zweck zu erreichen oder zumindest zu fördern.</li><li>Die reine Möglichkeit der Zweckerreichung genügt.</li></ul>`,
+            '3. Erforderlichkeit': `<ul><li>Es darf kein milderes, gleich wirksames Mittel zur Verfügung stehen.</li><li>Die Behörde muss das den Bürger am wenigsten belastende Mittel wählen.</li></ul>`,
+            '4. Angemessenheit (Verhältnismäßigkeit i.e.S.)': `<ul><li>Die Nachteile für den Betroffenen dürfen nicht außer Verhältnis zum angestrebten Nutzen stehen.</li><li>Es findet eine Abwägung zwischen der Eingriffsintensität und der Wichtigkeit des Zwecks statt.</li></ul>`,
+            'Wann liegt ein Verstoß vor?': `<ul><li>Wenn für eine Ungleichbehandlung vergleichbarer Fälle kein sachlicher, vernünftiger Grund vorliegt.</li><li>Willkürliche Kriterien (z.B. persönliche Vorlieben) sind unzulässig.</li></ul>`,
+            'Keine Gleichheit im Unrecht': `<ul><li>Ein Bürger kann nicht beanspruchen, dass die Verwaltung bei ihm denselben Fehler macht wie bei einem anderen.</li><li>Die Bindung an das Gesetz (Art. 20 III GG) hat Vorrang vor einer fehlerhaften Gleichbehandlung.</li></ul>`,
+            '1. Hoheitliche Maßnahme': `<ul><li><strong>Maßnahme:</strong> Jedes zweckgerichtete Handeln mit Entscheidungscharakter.</li><li><strong>Hoheitlich:</strong> Einseitiges Handeln im Über-/Unterordnungsverhältnis (Staat agiert mit Autorität, nicht als gleichberechtigter Partner).</li></ul>`,
+            '2. Behörde': `<ul><li>Jede Stelle, die Aufgaben der öffentlichen Verwaltung wahrnimmt (§ 1 IV VwVfG).</li><li>Umfasst auch Beliehene (z.B. TÜV, Notar).</li></ul>`,
+            '3. Auf dem Gebiet des öffentlichen Rechts': `<ul><li>Die Rechtsgrundlage der Maßnahme muss dem öffentlichen Recht zuzuordnen sein.</li><li>Prüfung oft über die modifizierte Subjektstheorie (Sonderrechtstheorie).</li></ul>`,
+            '4. Regelung': `<ul><li>Kernmerkmal: Maßnahme ist unmittelbar auf eine verbindliche Rechtsfolge gerichtet.</li><li>Rechtsfolge = Begründung, Änderung, Aufhebung oder verbindliche Feststellung eines Rechts/einer Pflicht.</li></ul>`,
+            'Arten der Regelung': `<ul><li><strong>Befehlender VA:</strong> Statuiert ein verbindliches Gebot oder Verbot.</li><li><strong>Rechtsgestaltender VA:</strong> Begründet, ändert oder beendet ein Recht.</li><li><strong>Feststellender VA:</strong> Stellt ein Recht/Rechtsverhältnis verbindlich fest.</li></ul>`,
+            '5. Einzelfall': `<ul><li>Regelung eines konkret-individuellen Sachverhalts.</li><li><strong>Konkret:</strong> Einmaliger, bestimmter Sachverhalt.</li><li><strong>Individuell:</strong> Bestimmte/bestimmbare Person(en).</li></ul>`,
+            'Sonderfall: Allgemeinverfügung (§ 35 S. 2 VwVfG)': `<ul><li>Ist ein VA, der einen Sachverhalt <strong>konkret</strong>, aber für einen <strong>generellen</strong> (allgemeinen) Personenkreis regelt.</li><li>Bsp: Verkehrszeichen, Auflösung einer Demo.</li></ul>`,
+            '6. Außenwirkung': `<ul><li>Rechtsfolgen treten bei einem Rechtssubjekt außerhalb der Verwaltung ein.</li><li>Abgrenzung bei Sonderstatusverhältnissen (Schule, Beamte): Grundverhältnis (VA mit Außenwirkung) vs. Betriebsverhältnis (interne Maßnahme).</li></ul>`,
+            '1. Nach dem Inhalt': `<ul><li><strong>Befehlend:</strong> Gebot/Verbot (z.B. Abrissverfügung).</li><li><strong>Rechtsgestaltend:</strong> Begründet/ändert/beendet ein Recht (z.B. Baugenehmigung).</li><li><strong>Feststellend:</strong> Klärt verbindlich eine Rechtslage (z.B. Feststellung der Staatsangehörigkeit).</li></ul>`,
+            '2. Nach der Wirkung für den Adressaten': `<ul><li><strong>Begünstigend:</strong> Gewährt einen rechtlichen Vorteil (§ 48 VwVfG).</li><li><strong>Belastend:</strong> Legt eine Pflicht auf oder lehnt Vorteil ab.</li><li><strong>Mit Doppelwirkung:</strong> Zugleich begünstigend und belastend für dieselbe Person.</li><li><strong>Mit Drittwirkung:</strong> Begünstigt den Adressaten, belastet aber einen Dritten (z.B. Nachbar bei Baugenehmigung).</li></ul>`,
+            '1. Wirksamkeit durch Bekanntgabe (§ 43 Abs. 1 VwVfG)': `<ul><li>Grundsatz: Ein VA wird mit Bekanntgabe an den Adressaten wirksam.</li><li>Auch ein rechtswidriger VA ist wirksam (Ausnahme: Nichtigkeit, § 44 VwVfG).</li><li>Ohne Bekanntgabe existiert der VA rechtlich nicht ("Nicht-Akt").</li></ul>`,
+            'Voraussetzungen der Bekanntgabe:': `<ul><li><strong>Wissentlich & willentlich:</strong> Gezielte Eröffnung durch die Behörde.</li><li><strong>In amtlicher Eigenschaft:</strong> Kein privates Handeln.</li><li><strong>An den richtigen Adressaten.</strong></li><li><strong>Zugang</strong> im Machtbereich des Empfängers.</li></ul>`,
+            '2. Arten der Bekanntgabe (§ 41 VwVfG)': `<ul><li><strong>Nichtförmlich:</strong> Mündlich oder per einfachem Brief (mit 3-Tages-Zugangsfiktion).</li><li><strong>Förmlich (Zustellung):</strong> Per PZU ("gelber Brief") oder Einschreiben, um Zugang sicher nachzuweisen.</li><li><strong>Öffentlich:</strong> Bei Allgemeinverfügungen oder unbekanntem Adressaten.</li></ul>`,
+             'Nichtförmliche Bekanntgabe': `<ul><li><strong>Mündlich:</strong> Wirksam mit Vernehmen der Erklärung.</li><li><strong>Schriftlich (§ 41 II VwVfG):</strong> Gilt am 3. Tag nach Aufgabe zur Post als bekannt gegeben (widerlegbare Fiktion).</li></ul>`,
+            'Förmliche Bekanntgabe (Zustellung)': `<ul><li>Sichere Form der Bekanntgabe, wenn der Zugangsnachweis wichtig ist.</li><li>Typisch: Zustellung per Postzustellungsurkunde (PZU, "gelber Brief").</li></ul>`,
+            'Öffentliche Bekanntgabe (§ 41 Abs. 3, 4 VwVfG)': `<ul><li>Nur ausnahmsweise, z.B. bei Allgemeinverfügungen.</li><li>VA gilt 2 Wochen nach ortsüblicher Bekanntmachung als bekannt gegeben.</li></ul>`,
+            '3. Bestandskraft': `<ul><li>Tritt ein, wenn die Rechtsbehelfsfrist (i.d.R. 1 Monat) abgelaufen ist.</li><li>Der VA wird dadurch unanfechtbar und bindend, auch wenn er rechtswidrig war.</li></ul>`,
+            'Zulässigkeit von Nebenbestimmungen': `<ul><li><strong>Bei gebundenen Entscheidungen:</strong> Nur zulässig, wenn gesetzlich erlaubt.</li><li><strong>Bei Ermessensentscheidungen:</strong> Zulässig, um Voraussetzungen sicherzustellen.</li><li>Müssen verhältnismäßig sein und dürfen dem Hauptzweck nicht widersprechen.</li></ul>`,
+            'Arten von Nebenbestimmungen (§ 36 Abs. 2 VwVfG)': `<ul><li><strong>Befristung:</strong> Wirksamkeit an gewissen Zeitpunkt gebunden.</li><li><strong>Bedingung:</strong> Wirksamkeit an ungewisses Ereignis gebunden (aufschiebend/auflösend).</li><li><strong>Widerrufsvorbehalt:</strong> Behörde behält sich Widerruf vor.</li><li><strong>Auflage:</strong> Zusätzliche, selbstständige Verpflichtung (Haupt-VA bleibt sofort wirksam).</li><li><strong>Im Zweifel:</strong> Auflage statt Bedingung.</li></ul>`,
+            'Sonderform: Die modifizierte Auflage': `<ul><li>Rechtlich keine Nebenbestimmung, sondern eine Teilablehnung mit einem neuen Angebot.</li><li>Beispiel: Satteldach statt beantragtem Flachdach genehmigt.</li><li>Nicht isoliert anfechtbar.</li></ul>`,
+            'Rechtsschutz gegen Nebenbestimmungen': `<ul><li>Grundsatz: Isolierte Anfechtungsklage gegen die Nebenbestimmung ist möglich.</li><li>Voraussetzung: Haupt-VA muss ohne die Nebenbestimmung sinnvoll und rechtmäßig bleiben.</li></ul>`,
+            'A. Formelle Rechtmäßigkeit': `<ul><li>Prüft das "Wie" des Zustandekommens.</li><li>Wichtige Punkte: Zuständigkeit, Verfahren (Anhörung § 28, Akteneinsicht § 29), Form (Bestimmtheit § 37, Begründung § 39).</li><li>Fehler können oft geheilt (§ 45) oder unbeachtlich (§ 46) sein.</li></ul>`,
+            'I. Zuständigkeit': `<ul><li>Prüfung der sachlichen, örtlichen und instanziellen Zuständigkeit der Behörde.</li><li>Fehlende Zuständigkeit führt i.d.R. zur Rechtswidrigkeit.</li></ul>`,
+            'II. Verfahren': `<ul><li>Wurde das gesetzlich vorgeschriebene Verfahren eingehalten?</li><li><strong>Wichtigster Punkt:</strong> Anhörung des Betroffenen vor belastenden Maßnahmen (§ 28 VwVfG).</li></ul>`,
+            'III. Form': `<ul><li>Wurde die gesetzlich vorgeschriebene Form beachtet?</li><li><strong>Wichtigste Punkte:</strong> Bestimmtheit (§ 37 VwVfG) und Begründung (§ 39 VwVfG).</li></ul>`,
+            'B. Materielle Rechtmäßigkeit': `<ul><li>Prüft das "Was" (den Inhalt).</li><li>Wichtige Punkte: Ermächtigungsgrundlage, Tatbestandsvoraussetzungen, richtige Rechtsfolge (Ermessen, Verhältnismäßigkeit), richtiger Adressat.</li></ul>`,
+            'I. Ermächtigungsgrundlage': `<ul><li>Gibt es ein Gesetz, das die Behörde zu dieser Maßnahme ermächtigt? (Vorbehalt des Gesetzes).</li><li>Ohne EGL ist ein Eingriffs-VA immer rechtswidrig.</li></ul>`,
+            'II. Tatbestandsvoraussetzungen der Ermächtigungsgrundlage': `<ul><li>Liegen alle "Wenn-Bedingungen" der Rechtsnorm vor?</li><li>Klassische Subsumtionsarbeit.</li></ul>`,
+            'III. Richtiger Adressat': `<ul><li>Wurde die Maßnahme an die richtige Person gerichtet? (z.B. an den Verhaltens- oder Zustandsstörer).</li></ul>`,
+            'IV. Rechtsfolge': `<ul><li>Wurde die "Dann-Folge" der Norm korrekt umgesetzt?</li><li>Bei Ermessen ("kann"): Prüfung auf Ermessensfehler.</li><li>Immer: Prüfung der Verhältnismäßigkeit.</li></ul>`,
+            '1. Ermessensnichtgebrauch (oder Ermessensausfall)': `<ul><li>Behörde erkennt ihr Ermessen nicht und hält sich fälschlicherweise für gebunden.</li><li>Es findet keine Abwägung statt.</li></ul>`,
+            '2. Ermessensüberschreitung': `<ul><li>Die gewählte Rechtsfolge liegt außerhalb des gesetzlich erlaubten Rahmens.</li><li>Beispiel: Höhere Gebühr als maximal zulässig.</li></ul>`,
+            '3. Ermessensfehlgebrauch (oder Ermessensmissbrauch)': `<ul><li>Die Abwägung ist fehlerhaft.</li><li>Gründe sind sachfremd, willkürlich oder verstoßen gegen Grundrechte (v.a. Verhältnismäßigkeit, Gleichheit).</li></ul>`,
+        };
+
+        // --- SCRIPT LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentArea = document.getElementById('content-area');
+            const topicNav = document.getElementById('topic-nav');
+            const openSchemaBtn = document.getElementById('open-schema-btn');
+            const closeSchemaBtn = document.getElementById('close-schema-btn');
+            const schemaModal = document.getElementById('schema-modal');
+
+            /**
+             * Displays the content for the selected topic.
+             * @param {string} topic - The key of the topic in learningContent.
+             */
+            function displayContent(topic) {
+                const data = learningContent[topic];
+                if (!data) {
+                    contentArea.innerHTML = '<h1>Inhalt nicht gefunden</h1><p>Bitte wählen Sie ein Thema aus der Navigation.</p>';
+                    return;
+                }
+                contentArea.innerHTML = `<h1>${data.title}</h1>${data.content}`;
+                
+                document.querySelectorAll('.sidebar-link').forEach(a => a.classList.remove('active'));
+                const activeLink = document.querySelector(`.sidebar-link[data-topic="${topic}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                addFlashcardButtons(); 
+            }
+            
+            /**
+             * Adds flashcard buttons and content to all h3/h4 elements.
+             */
+            function addFlashcardButtons() {
+                const headings = contentArea.querySelectorAll('h3, h4');
+                headings.forEach((heading, index) => {
+                    // Skip headings within exercise containers
+                    if (heading.closest('.exercise-container')) {
+                        return;
+                    }
+                    
+                    const headingText = heading.textContent.trim();
+                    const summaryHTML = flashcardSummaries[headingText];
+
+                    if (summaryHTML) {
+                        const flashcardId = `flashcard-${topicNav.querySelector('.active').dataset.topic}-${index}`;
+
+                        const button = document.createElement('button');
+                        button.className = 'flashcard-toggle-btn';
+                        button.textContent = 'Karteikarte';
+                        button.dataset.flashcardId = flashcardId;
+
+                        const containerClass = heading.tagName === 'H3' ? 'h3-container' : 'h4-container';
+                        const container = document.createElement('div');
+                        container.className = containerClass;
+                        
+                        heading.parentNode.insertBefore(container, heading);
+                        container.appendChild(heading);
+                        container.appendChild(button);
+
+                        const flashcardContent = document.createElement('div');
+                        flashcardContent.id = flashcardId;
+                        flashcardContent.className = 'flashcard-content hidden';
+                        flashcardContent.innerHTML = summaryHTML;
+                        
+                        container.parentNode.insertBefore(flashcardContent, container.nextSibling);
+                    }
+                });
+            }
+
+            // Centralized event listener for all toggle buttons
+            contentArea.addEventListener('click', function(e) {
+                // Summary toggle
+                if (e.target.matches('.summary-toggle-btn')) {
+                    const summaryId = e.target.dataset.summary;
+                    const summaryEl = document.getElementById(summaryId);
+                    if (summaryEl) {
+                        const isHidden = summaryEl.classList.toggle('hidden');
+                        e.target.textContent = isHidden ? 'Kernpunkte' : 'Verbergen';
+                    }
+                }
+                // Solution toggle
+                if (e.target.matches('.solution-toggle-btn')) {
+                    const solutionEl = e.target.nextElementSibling;
+                     if (solutionEl && solutionEl.classList.contains('solution-content')) {
+                        const isHidden = solutionEl.classList.toggle('hidden');
+                        e.target.textContent = isHidden ? 'Lösung anzeigen' : 'Lösung verbergen';
+                    }
+                }
+                // Flashcard toggle
+                if (e.target.matches('.flashcard-toggle-btn')) {
+                    const flashcardId = e.target.dataset.flashcardId;
+                    const flashcardEl = document.getElementById(flashcardId);
+                    if (flashcardEl) {
+                         const isHidden = flashcardEl.classList.toggle('hidden');
+                         e.target.textContent = isHidden ? 'Karteikarte' : 'Verbergen';
+                    }
+                }
+            });
+
+            // Sidebar navigation
+            topicNav.addEventListener('click', (e) => {
+                e.preventDefault();
+                const link = e.target.closest('a');
+                if (link && link.dataset.topic) {
+                    document.getElementById('main-content').scrollTop = 0;
+                    displayContent(link.dataset.topic);
+                }
+            });
+
+            // Modal logic
+            openSchemaBtn.addEventListener('click', () => {
+                schemaModal.classList.remove('hidden');
+            });
+
+            closeSchemaBtn.addEventListener('click', () => {
+                schemaModal.classList.add('hidden');
+            });
+
+            schemaModal.addEventListener('click', (e) => {
+                if (e.target === schemaModal) {
+                    schemaModal.classList.add('hidden');
+                }
+            });
+
+            // Load initial content
+            displayContent('grundlagen');
+        });
+
+    </script>
+</body>
+</html>
